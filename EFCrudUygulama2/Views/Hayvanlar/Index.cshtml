@@ -1,0 +1,50 @@
+﻿@model List<Hayvan>
+
+@{
+
+    string? durum = Context.Request.Query["Durum"];
+    string? yuklem = durum == "Eklendi" ? "eklenmiştir" : durum == "Duzenlendi" ? "düzenlenmiştir" : durum == "Silindi" ? "silinmiştir" : null;
+    ViewBag.Title = "Hayvanlar Listesi";
+}
+
+<h1>Hayvanlar Listesi</h1>
+
+
+@if (yuklem != null)
+ {
+    <div class="alert alert-success">
+        Seçtiğiniz hayvan başarıyla @yuklem.
+    </div>
+ }
+
+
+
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ad</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hayvan in Model)
+        {
+            <tr>
+                <td>@hayvan.Id</td>
+                <td>@hayvan.Ad</td>
+                <td>
+                    <a asp-controller="Hayvanlar" asp-action="Sil" asp-route-id="@hayvan.Id" class="btn btn-danger">Sil</a>
+                    <a asp-controller="Hayvanlar" asp-action="Duzenle" asp-route-id="@hayvan.Id" class="btn btn-primary">Düzenle</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Yeni" class="btn btn-success">Yeni Hayvan Ekle</a>
+
+
+
+

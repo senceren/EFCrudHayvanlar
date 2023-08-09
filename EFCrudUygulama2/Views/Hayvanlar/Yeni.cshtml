@@ -1,0 +1,16 @@
+﻿@model Hayvan
+
+@{ 
+    ViewBag.Title = "Yeni Hayvan Ekle";
+}
+
+<h1>Yeni Hayvan Ekle</h1>
+
+<form asp-action="Yeni" method="post">
+    <div class="mb-3">
+        <label asp-for="Ad" class="form-label">Ad</label>
+        <input asp-for="Ad" type="text" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary" type="submit">Ekle</button>  @*default submit*@
+</form>
